@@ -1,9 +1,16 @@
+const path = require('path');
 const router = require('express').Router();
 const apiRoutes = require('./api');
-const exerciseRoutes = require('./exercise-routes');
 
 router.use('/api', apiRoutes);
-router.use('/exercise', exerciseRoutes);
+
+router.use('/exercise', (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/exercise.html"));
+});
+
+router.use('/stats', (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/stats.html"));
+});
 
 router.use((req, res) => {
   res.send("<h1>Wrong Route!</h1>")
